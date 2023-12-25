@@ -1,5 +1,6 @@
-import React, { ReactNode } from "react"
 import { Noto_Color_Emoji } from "next/font/google"
+import { ReactNode } from "react"
+import { cn } from "src/libs/utils"
 
 const notoColorEmoji = Noto_Color_Emoji({
   weight: ["400"],
@@ -13,7 +14,10 @@ type Props = {
 
 export const Emoji = ({ className, children }: Props) => {
   return (
-    <span className={className} css={[notoColorEmoji.style]}>
+    <span
+      className={cn(className, "font-noto-color-emoji")}
+      style={notoColorEmoji.style}
+    >
       {children}
     </span>
   )

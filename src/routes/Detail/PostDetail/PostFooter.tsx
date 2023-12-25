@@ -1,4 +1,3 @@
-import styled from "@emotion/styled"
 import { useRouter } from "next/router"
 import React from "react"
 
@@ -6,29 +5,21 @@ type Props = {}
 
 const Footer: React.FC<Props> = () => {
   const router = useRouter()
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" })
+  }
+
   return (
-    <StyledWrapper>
-      <a onClick={() => router.push("/")}>← Back</a>
-      <a onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
+    <div className="flex justify-between font-medium text-gray-700">
+      <a onClick={() => router.push("/")} className="mt-2 cursor-pointer">
+        ← Back
+      </a>
+      <a onClick={scrollToTop} className="mt-2 cursor-pointer">
         ↑ Top
       </a>
-    </StyledWrapper>
+    </div>
   )
 }
 
 export default Footer
-
-const StyledWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  font-weight: 500;
-  color: ${({ theme }) => theme.colors.gray10};
-  a {
-    margin-top: 0.5rem;
-    cursor: pointer;
-
-    :hover {
-      color: ${({ theme }) => theme.colors.gray12};
-    }
-  }
-`

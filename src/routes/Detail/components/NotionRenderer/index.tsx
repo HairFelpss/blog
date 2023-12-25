@@ -2,7 +2,6 @@ import dynamic from "next/dynamic"
 import Image from "next/image"
 import Link from "next/link"
 import { ExtendedRecordMap } from "notion-types"
-import useScheme from "src/hooks/useScheme"
 
 // core styles shared by all of react-notion-x (required)
 import "react-notion-x/src/styles.css"
@@ -14,7 +13,6 @@ import "prismjs/themes/prism-tomorrow.css"
 
 import "katex/dist/katex.min.css"
 import { FC } from "react"
-import styled from "@emotion/styled"
 
 const _NotionRenderer = dynamic(
   () => import("react-notion-x").then((m) => m.NotionRenderer),
@@ -81,20 +79,17 @@ const Modal = dynamic(
   }
 )
 
-const mapPageUrl = (id: string) => {
-  return "https://www.notion.so/" + id.replace(/-/g, "")
-}
+const mapPageUrl = (id: string) =>
+  "https://www.notion.so/" + id.replace(/-/g, "")
 
 type Props = {
   recordMap: ExtendedRecordMap
 }
 
 const NotionRenderer: FC<Props> = ({ recordMap }) => {
-  const [scheme] = useScheme()
   return (
-    <StyledWrapper>
+    <div className="p-4">
       <_NotionRenderer
-        darkMode={scheme === "dark"}
         recordMap={recordMap}
         components={{
           Code,
@@ -107,18 +102,8 @@ const NotionRenderer: FC<Props> = ({ recordMap }) => {
         }}
         mapPageUrl={mapPageUrl}
       />
-    </StyledWrapper>
+    </div>
   )
 }
 
 export default NotionRenderer
-
-const StyledWrapper = styled.div`
-  /* // TODO: why render? */
-  .notion-collection-page-properties {
-    display: none !important;
-  }
-  .notion-page {
-    padding: 0;
-  }
-`

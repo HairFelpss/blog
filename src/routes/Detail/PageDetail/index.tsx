@@ -1,23 +1,15 @@
-import React from "react"
-import styled from "@emotion/styled"
-import NotionRenderer from "../components/NotionRenderer"
 import usePostQuery from "src/hooks/usePostQuery"
-type Props = {}
+import NotionRenderer from "../components/NotionRenderer"
 
-const PageDetail: React.FC<Props> = () => {
+const PageDetail = () => {
   const data = usePostQuery()
 
   if (!data) return null
   return (
-    <StyledWrapper>
+    <div className="mx-auto max-w-56rem">
       <NotionRenderer recordMap={data.recordMap} />
-    </StyledWrapper>
+    </div>
   )
 }
 
 export default PageDetail
-
-const StyledWrapper = styled.div`
-  margin: 0 auto;
-  max-width: 56rem;
-`

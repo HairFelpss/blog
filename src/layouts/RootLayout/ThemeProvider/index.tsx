@@ -1,21 +1,9 @@
-import { ThemeProvider as _ThemeProvider } from "@emotion/react"
-import { Global } from "./Global"
-import { createTheme } from "src/styles"
+import { type FC, type PropsWithChildren } from "react"
 
-type Props = {
-  scheme: string
-  children?: React.ReactNode
-}
+import { Inter } from "next/font/google"
 
-export const ThemeProvider = ({ scheme, children }: Props) => {
-  const theme = createTheme({
-    scheme: scheme === "light" ? "light" : "dark",
-  })
+const inter = Inter({ subsets: ["latin"] })
 
-  return (
-    <_ThemeProvider theme={theme}>
-      <Global />
-      {children}
-    </_ThemeProvider>
-  )
+export const ThemeProvider: FC<PropsWithChildren> = ({ children }) => {
+  return <div className={inter.className}>{children}</div>
 }

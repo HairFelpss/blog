@@ -1,9 +1,7 @@
-import { CONFIG } from "site.config"
 import React from "react"
-import styled from "@emotion/styled"
+import { CONFIG } from "site.config"
 
-const d = new Date()
-const y = d.getFullYear()
+const year = new Date().getFullYear()
 const from = +CONFIG.since
 
 type Props = {
@@ -12,25 +10,20 @@ type Props = {
 
 const Footer: React.FC<Props> = ({ className }) => {
   return (
-    <StyledWrapper className={className}>
+    <div
+      className={`mt-3 text-sm text-gray-700 dark:text-gray-300 ${className}`}
+    >
       <a
         href={`https://github.com/${CONFIG.profile.github}`}
         target="_blank"
         rel="noreferrer"
+        className="block"
       >
-        © {CONFIG.profile.name} {from === y || !from ? y : `${from} - ${y}`}
+        © {CONFIG.profile.name}{" "}
+        {from === year || !from ? year : `${from} - ${year}`}
       </a>
-    </StyledWrapper>
+    </div>
   )
 }
 
 export default Footer
-
-const StyledWrapper = styled.div`
-  a {
-    margin-top: 0.75rem;
-    font-size: 0.875rem;
-    line-height: 1.25rem;
-    color: ${({ theme }) => theme.colors.gray10};
-  }
-`

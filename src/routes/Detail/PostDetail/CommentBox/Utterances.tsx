@@ -1,21 +1,14 @@
-import { CONFIG } from "site.config"
-import { useEffect } from "react"
-import styled from "@emotion/styled"
-import useScheme from "src/hooks/useScheme"
 import { useRouter } from "next/router"
-
-//TODO: useRef?
-
+import { useEffect } from "react"
+import { CONFIG } from "site.config"
 type Props = {
   issueTerm: string
 }
 
 const Utterances: React.FC<Props> = ({ issueTerm }) => {
-  const [scheme] = useScheme()
   const router = useRouter()
 
   useEffect(() => {
-    const theme = scheme === "light" ? "github-light" : "github-dark"
     const script = document.createElement("script")
     const anchor = document.getElementById("comments")
     if (!anchor) return
@@ -24,8 +17,8 @@ const Utterances: React.FC<Props> = ({ issueTerm }) => {
     script.setAttribute("crossorigin", "anonymous")
     script.setAttribute("async", `true`)
     script.setAttribute("issue-term", issueTerm)
-    script.setAttribute("theme", theme)
     const config: { [key: string]: string } = CONFIG.utterances.config
+
     Object.keys(config).forEach((key) => {
       script.setAttribute(key, config[key])
     })
@@ -33,20 +26,15 @@ const Utterances: React.FC<Props> = ({ issueTerm }) => {
     return () => {
       anchor.innerHTML = ""
     }
-  }, [scheme, router])
+  }, [router])
+
   return (
     <>
-      <StyledWrapper id="comments">
+      <div id="comments" className="mt-4 sm:mt-0">
         <div className="utterances-frame"></div>
-      </StyledWrapper>
+      </div>
     </>
   )
 }
 
 export default Utterances
-
-const StyledWrapper = styled.div`
-  @media (min-width: 768px) {
-    margin-left: -4rem;
-  }
-`

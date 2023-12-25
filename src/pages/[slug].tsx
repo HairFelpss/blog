@@ -1,16 +1,16 @@
-import Detail from "src/routes/Detail"
-import { filterPosts } from "src/libs/utils/notion"
-import { CONFIG } from "site.config"
-import { NextPageWithLayout } from "../types"
-import CustomError from "src/routes/Error"
-import { getRecordMap, getPosts } from "src/apis"
-import MetaConfig from "src/components/MetaConfig"
-import { GetStaticProps } from "next"
-import { queryClient } from "src/libs/react-query"
-import { queryKey } from "src/constants/queryKey"
 import { dehydrate } from "@tanstack/react-query"
+import { GetStaticProps } from "next"
+import { CONFIG } from "site.config"
+import { getPosts, getRecordMap } from "src/apis"
+import MetaConfig from "src/components/MetaConfig"
+import { queryKey } from "src/constants/queryKey"
 import usePostQuery from "src/hooks/usePostQuery"
+import { queryClient } from "src/libs/react-query"
+import { filterPosts } from "src/libs/utils/notion"
 import { FilterPostsOptions } from "src/libs/utils/notion/filterPosts"
+import Detail from "src/routes/Detail"
+import CustomError from "src/routes/Error"
+import { NextPageWithLayout } from "../types"
 
 const filter: FilterPostsOptions = {
   acceptStatus: ["Public", "PublicOnDetail"],
@@ -18,9 +18,18 @@ const filter: FilterPostsOptions = {
 }
 
 export const getStaticPaths = async () => {
+  console.log("********** 21 => starting getStaticPaths() in [slug].tsx")
+  console.log(
+    `L 23 => ${new Date().getMinutes()} minutes, ${new Date().getSeconds()} seconds`
+  )
   const posts = await getPosts()
+
   const filteredPost = filterPosts(posts, filter)
 
+  console.log(filteredPost.map((row) => `/${row.slug}`))
+  console.log(
+    `L 30 => ${new Date().getMinutes()} minutes, ${new Date().getSeconds()} seconds`
+  )
   return {
     paths: filteredPost.map((row) => `/${row.slug}`),
     fallback: true,
@@ -28,9 +37,14 @@ export const getStaticPaths = async () => {
 }
 
 export const getStaticProps: GetStaticProps = async (context) => {
+  console.log("********** 32 => starting getStaticProps() in [slug].tsx")
+  console.log(
+    `L 41 => ${new Date().getMinutes()} minutes, ${new Date().getSeconds()} seconds`
+  )
   const slug = context.params?.slug
 
   const posts = await getPosts()
+
   const feedPosts = filterPosts(posts)
   await queryClient.prefetchQuery(queryKey.posts(), () => feedPosts)
 
@@ -43,6 +57,9 @@ export const getStaticProps: GetStaticProps = async (context) => {
     recordMap,
   }))
 
+  console.log(
+    `L 60 => ${new Date().getMinutes()} minutes, ${new Date().getSeconds()} seconds`
+  )
   return {
     props: {
       dehydratedState: dehydrate(queryClient),

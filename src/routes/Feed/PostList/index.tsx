@@ -1,14 +1,14 @@
 import { useRouter } from "next/router"
 import React, { useEffect, useState } from "react"
-import PostCard from "src/routes/Feed/PostList/PostCard"
 import { DEFAULT_CATEGORY } from "src/constants"
 import usePostsQuery from "src/hooks/usePostsQuery"
+import PostCard from "src/routes/Feed/PostList/PostCard"
 
 type Props = {
-  q: string
+  query: string
 }
 
-const PostList: React.FC<Props> = ({ q }) => {
+const PostList: React.FC<Props> = ({ query }) => {
   const router = useRouter()
   const data = usePostsQuery()
   const [filteredPosts, setFilteredPosts] = useState(data)
@@ -24,7 +24,8 @@ const PostList: React.FC<Props> = ({ q }) => {
       newFilteredPosts = newFilteredPosts.filter((post) => {
         const tagContent = post.tags ? post.tags.join(" ") : ""
         const searchContent = post.title + post.summary + tagContent
-        return searchContent.toLowerCase().includes(q.toLowerCase())
+
+        return searchContent?.toLowerCase().includes(query?.toLowerCase())
       })
 
       // tag
@@ -48,7 +49,7 @@ const PostList: React.FC<Props> = ({ q }) => {
 
       return newFilteredPosts
     })
-  }, [q, currentTag, currentCategory, currentOrder, setFilteredPosts])
+  }, [query, currentTag, currentCategory, currentOrder, setFilteredPosts])
 
   return (
     <>

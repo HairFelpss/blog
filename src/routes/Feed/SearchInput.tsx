@@ -1,45 +1,24 @@
-import styled from "@emotion/styled"
-import React, { InputHTMLAttributes, ReactNode } from "react"
-import { Emoji } from "src/components/Emoji"
+import React, { InputHTMLAttributes } from "react"
 
-interface Props extends InputHTMLAttributes<HTMLInputElement> {}
+type Props = InputHTMLAttributes<HTMLInputElement>
 
 const SearchInput: React.FC<Props> = ({ ...props }) => {
   return (
-    <StyledWrapper>
-      <div className="top">
-        <Emoji>🔎</Emoji> Search
+    <div className="mb-4 md:mb-8">
+      <div className="text-lg font-bold mb-3">
+        <span role="img" aria-label="search emoji">
+          🔎
+        </span>{" "}
+        Search
       </div>
       <input
-        className="mid"
+        className="py-2 px-4 rounded-lg w-full bg-gray-400 focus:outline-none"
         type="text"
         placeholder="Search Keyword..."
         {...props}
       />
-    </StyledWrapper>
+    </div>
   )
 }
 
 export default SearchInput
-
-const StyledWrapper = styled.div`
-  margin-bottom: 1rem;
-
-  @media (min-width: 768px) {
-    margin-bottom: 2rem;
-  }
-  > .top {
-    padding: 0.25rem;
-    margin-bottom: 0.75rem;
-  }
-  > .mid {
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-    padding-left: 1.25rem;
-    padding-right: 1.25rem;
-    border-radius: 1rem;
-    outline-style: none;
-    width: 100%;
-    background-color: ${({ theme }) => theme.colors.gray4};
-  }
-`
