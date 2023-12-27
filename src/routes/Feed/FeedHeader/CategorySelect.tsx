@@ -35,10 +35,10 @@ const CategorySelect: React.FC<Props> = () => {
       </div>
       {opened && (
         <div className="absolute z-40 p-1 rounded bg-gray-200 dark:bg-gray-600 text-gray-800 dark:text-gray-300 shadow-md">
-          {Object.keys(data).map((key, idx) => (
+          {Object.keys(data).map((key, index) => (
             <div
               className="p-1 pl-2 pr-2 rounded text-sm whitespace-nowrap cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-700"
-              key={idx}
+              key={index}
               onClick={() => handleOptionClick(key)}
             >
               {`${key} (${data[key]})`}

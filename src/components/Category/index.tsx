@@ -33,7 +33,7 @@ const Category: React.FC<Props> = ({ readOnly = false, children }) => {
   return (
     <div
       onClick={() => handleClick(children)}
-      className={`p-1.5 rounded-full inline-block text-sm leading-5 ${
+      className={`p-1.5 rounded-full inline-block text-sm leading-5 text-black ${
         readOnly ? "cursor-default" : "cursor-pointer"
       }`}
       style={{ backgroundColor: categoryColor }}

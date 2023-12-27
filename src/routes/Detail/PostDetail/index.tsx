@@ -16,7 +16,7 @@ const PostDetail: React.FC<Props> = () => {
   const category = (data.category && data.category?.[0]) || undefined
 
   return (
-    <div className="p-6 max-w-56rem mx-auto bg-white dark:bg-gray-400 shadow-md rounded-lg">
+    <div className="p-6 max-w-56rem mx-auto shadow-md rounded-lg">
       <article className="max-w-42rem mx-auto">
         {category && (
           <div className="mb-2">

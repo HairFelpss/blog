@@ -3,7 +3,11 @@ import { CONFIG } from "site.config"
 
 const Logo = () => {
   return (
-    <Link href="/" aria-label={CONFIG.blog.title} className="ml-5">
+    <Link
+      href="/"
+      aria-label={CONFIG.blog.title}
+      className="btn btn-ghost text-xl"
+    >
       {CONFIG.blog.title}
     </Link>
   )

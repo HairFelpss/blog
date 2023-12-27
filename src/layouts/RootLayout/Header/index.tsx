@@ -5,14 +5,10 @@ import ThemeToggle from "./ThemeToggle"
 
 const Header: React.FC<{ fullWidth: boolean }> = ({ fullWidth }) => {
   return (
-    <div className="z-50 sticky top-0 bg-gray-100 shadow-md">
-      <div
-        className={`container flex flex-row items-center justify-between px-4 md:px-24 py-2 ${
-          fullWidth ? "md:px-32" : ""
-        }`}
-      >
+    <div className="navbar">
+      <div className="flex flex-1 flex-row items-center justify-around">
         <Logo />
-        <div className="flex gap-3 items-center">
+        <div className="flex flex-row items-center justify-around">
           <ThemeToggle />
           <NavBar />
         </div>

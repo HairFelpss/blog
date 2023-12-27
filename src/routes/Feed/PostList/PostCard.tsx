@@ -15,7 +15,7 @@ const PostCard: React.FC<Props> = ({ data }) => {
 
   return (
     <Link href={`/${data.slug}`}>
-      <span className="relative block overflow-hidden transition-shadow duration-300 bg-white dark:bg-gray-400 rounded-lg shadow-md hover:shadow-lg mb-6 md:mb-8">
+      <span className="card bg-base-100 overflow-hidden transition-shadow duration-300 rounded-lg shadow-lg hover:shadow-xl mb-6 md:mb-8">
         <article>
           {category && (
             <div className="absolute top-3 left-3 z-10">
@@ -23,7 +23,7 @@ const PostCard: React.FC<Props> = ({ data }) => {
             </div>
           )}
           {data.thumbnail && (
-            <div className="relative bg-gray-200 h-0 aspect-w-1 aspect-h-0 md:aspect-w-1 md:aspect-h-1">
+            <div className="relative h-0 aspect-w-1 aspect-h-0 md:aspect-w-1 md:aspect-h-1">
               <Image
                 src={data.thumbnail}
                 layout="fill"
@@ -38,7 +38,7 @@ const PostCard: React.FC<Props> = ({ data }) => {
             }`}
           >
             <header className="mb-4 md:mb-6">
-              <h2 className="text-lg font-medium cursor-pointer hover:text-gray-700 dark:hover:text-gray-300 md:text-xl md:font-semibold">
+              <h2 className="text-lg font-medium cursor-pointer md:text-xl md:font-semibold">
                 {data.title}
               </h2>
               <div className="flex flex-wrap gap-2 mb-2">
@@ -47,7 +47,7 @@ const PostCard: React.FC<Props> = ({ data }) => {
                     <Tag key={idx}>{tag}</Tag>
                   ))}
               </div>
-              <div className="text-sm text-gray-600 dark:text-gray-400">
+              <div className="text-sm">
                 {formatDate(
                   data?.date?.start_date || data.createdTime,
                   CONFIG.lang
@@ -55,9 +55,7 @@ const PostCard: React.FC<Props> = ({ data }) => {
               </div>
             </header>
             <div className="hidden md:block">
-              <p className="text-gray-700 dark:text-gray-300 line-clamp-3">
-                {data.summary}
-              </p>
+              <p className="line-clamp-3">{data.summary}</p>
             </div>
           </div>
         </article>

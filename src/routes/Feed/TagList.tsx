@@ -33,7 +33,7 @@ const TagList: React.FC<Props> = () => {
       <div className="hidden md:block py-1 mb-3">
         <Emoji>🏷️</Emoji> Tags
       </div>
-      <div className="flex mb-6 gap-1.5 overflow-x-auto">
+      <div className="flex flex-row mb-6 gap-1.5 overflow-x-auto md:flex-col">
         {Object.keys(data).map((key) => (
           <a
             key={key}
